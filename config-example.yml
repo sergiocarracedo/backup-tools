@@ -1,0 +1,4 @@
+src: /source/dir
+dst: /destination/dir (you can use remote destination ex. user@host:/remote-dir
+exclude-list-tmp: /path/to/exclude-list.txt
+exclude-repo-files: true
