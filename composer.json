@@ -1,4 +1,11 @@
 {
+    "name" : "Backup Tools",
+    "authors" : [
+        "name": "Sergio Carracedo",
+        "email": "info@sergiocarracedo.es",
+        "homepage": "http://www.sergiocarracedo.es",
+        "role": "Developer"
+    ],
     "require": {
         "symfony/console": "^3.2",
         "symfony/process": "^3.2",
