@@ -1,5 +1,6 @@
 {
-    "name" : "Backup Tools",
+    "name" : "sergiocarracedo/backup-tools",
+    "description": "Backups tools"
     "authors" : [
         {
             "name": "Sergio Carracedo",
