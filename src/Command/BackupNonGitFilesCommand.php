@@ -34,6 +34,8 @@ use Symfony\Component\Process\Exception\ProcessFailedException;
 
 class BackupNonGitFilesCommand extends Command
 {
+    use LockableTrait;
+
     private $config;
 
     function __construct($name = null, $config)
@@ -41,8 +43,6 @@ class BackupNonGitFilesCommand extends Command
         parent::__construct($name);
         $this->config = $config;
     }
-
-    use LockableTrait;
 
 
     protected function configure()
@@ -122,6 +122,7 @@ class BackupNonGitFilesCommand extends Command
     protected function findGitDirectoriesRecusive($path)
     {
         $process = new Process('find ' . $path . ' -type d -name ".git"');
+        $process->setTimeout(4 * 60 * 60);
         $process->run();
 
         // executes after the command finishes
@@ -137,6 +138,10 @@ class BackupNonGitFilesCommand extends Command
             if ($dir == '.git') {
                 $item = implode('/', $path);
             }
+        });
+
+        $output = array_filter($output, function($value) {
+          return $value !== '';
         });
         return $output;
     }

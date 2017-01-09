@@ -26,6 +26,7 @@ require __DIR__ . '/vendor/autoload.php';
 
 use Symfony\Component\Console\Application;
 use BackupTool\Command\BackupNonGitFilesCommand;
+use BackupTool\Command\GitCheckStatusCommand;
 use Symfony\Component\Yaml\Yaml;
 
 $application = new Application();
@@ -33,10 +34,13 @@ $application = new Application();
 $config = Yaml::parse(file_get_contents(__DIR__ . '/config.yml'));
 
 $command = new BackupNonGitFilesCommand(null, $config);
-
 $application->add($command);
-$application->config = $config;
 
-$application->setDefaultCommand($command->getName(), true);
+$command = new BackupNonGitFilesCommand(null, $config);
+$application->add(new GitCheckStatusCommand(null, $config));
+
+//$application->config = $config;
+
+//$application->setDefaultCommand($command->getName(), true);
 
 $application->run();
